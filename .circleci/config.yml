@@ -1,0 +1,40 @@
+version: 2.1
+# List of jobs
+jobs:
+  # The build job
+  build:
+    working_directory: ~/repo
+    docker:
+        - image: miluca/umijs:latest
+    steps:
+        # Steps to be added yes
+        # Checkout the code from the branch into the working_directory
+        - checkout
+        # Log the current branch
+        - run:
+            name: Show current branch
+            command: echo ${CIRCLE_BRANCH}
+        # Restore local dependencies from cache
+        - restore_cache:
+            keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+        # Install project dependencies
+        - run:
+            name: Install local dependencies
+            command: npm install
+        # Cache local dependencies if they don't exist
+        - save_cache:
+            key: v1-dependencies-{{ checksum "package.json" }}
+            paths:
+                - node_modules
+        # Run the unit tests
+        - run:
+            name: Unit Testing
+            command: npm run test
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - build
+

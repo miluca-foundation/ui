@@ -1,4 +1,6 @@
-# Ant Design Pro
+# UI
+
+<a href="https://codeclimate.com/github/miluca-foundation/ui/maintainability"><img src="https://api.codeclimate.com/v1/badges/bc63d1b1893895b61bfc/maintainability" /></a>
 
 This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
 
